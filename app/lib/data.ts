@@ -107,8 +107,8 @@ export async function fetchFilteredInvoices(
       WHERE
         customers.name ILIKE ${`%${query}%`} OR
         customers.email ILIKE ${`%${query}%`} OR
-        invoices.amount::text ILIKE ${`%${query}%`} OR
-        invoices.date::text ILIKE ${`%${query}%`} OR
+        CAST(invoices.amount AS TEXT) ILIKE ${`%${query}%`} OR
+        CAST(invoices.date AS TEXT) ILIKE ${`%${query}%`} OR
         invoices.status ILIKE ${`%${query}%`}
       ORDER BY invoices.date DESC
       LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
@@ -129,8 +129,8 @@ export async function fetchInvoicesPages(query: string) {
     WHERE
       customers.name ILIKE ${`%${query}%`} OR
       customers.email ILIKE ${`%${query}%`} OR
-      invoices.amount::text ILIKE ${`%${query}%`} OR
-      invoices.date::text ILIKE ${`%${query}%`} OR
+      CAST(invoices.amount AS TEXT) ILIKE ${`%${query}%`} OR
+      CAST(invoices.date AS TEXT) ILIKE ${`%${query}%`} OR
       invoices.status ILIKE ${`%${query}%`}
   `;
 
